@@ -1,13 +1,15 @@
 # Number to text
 
-Creating a text string from a number in Russian. Convenient for preparing financial documents.
+Сценарий для [Alfred](https://www.alfredapp.com), позволяющий преобразовывать сумму в текст, в том числе прописной вариант с расчетом НДС 20% (текущая ставка в РФ).
+
+## Использование
+
+После установки сценария используйте алиас "n2t" для преобразования суммы в текст, например команда "n2t 12345" будет преобразована в "двенадцать тысяч триста сорок пять рублей 00 копеек".
+
+Для получения суммы в текстовом виде с выделением НДС 20% используйте алиас "nds", например команда  "nds 3000" будет преобразована в "3000 руб. (Три тысячи рублей 00 копеек), в т.ч. НДС (20%) 500 руб. (Пятьсот рублей 00 копеек)".
 
 ![Снимок экрана 2021-06-30 в 19 29 42](https://user-images.githubusercontent.com/1586471/123997893-8ce6d200-d9d9-11eb-96d7-dc212a9edfbc.png)
 
-## Install 
+## Установка 
 
-[Download](https://github.com/borzov/alfred-num2text-workflow/blob/main/alfred-num2text.alfredworkflow) and open this workflow.
-
-## Usage
-
-After install type alias "n2t" and number, for example "n2t 123456".
+[Скачайте сценарий](https://github.com/borzov/alfred-num2text-workflow/blob/main/alfred-num2text.alfredworkflow) и откройте его, Альфред установит его автоматически.

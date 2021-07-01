@@ -1,11 +1,13 @@
 <?php
 
+$type = $argv[1];
+$text = $argv[2];
+
 /**
  * Возвращает сумму прописью
- * @author runcore
  * @uses morph(...)
  */
-function num2str($num)
+function num2str($num, $ucfirst = false)
 {
     $nul = 'ноль';
     $ten = array(
@@ -43,12 +45,16 @@ function num2str($num)
     }
     $out[] = morph(intval($rub), $unit[1][0], $unit[1][1], $unit[1][2]); // rub
     $out[] = $kop . ' ' . morph($kop, $unit[0][0], $unit[0][1], $unit[0][2]); // kop
-    return trim(preg_replace('/ {2,}/', ' ', join(' ', $out)));
+    $result = trim(preg_replace('/ {2,}/', ' ', join(' ', $out)));
+    if ($ucfirst) {
+        $result = mb_strtolower($result, 'UTF-8');
+        $result = mb_strtoupper(mb_substr($result, 0, 1, 'UTF-8'), 'UTF-8') . mb_substr($result, 1, null,'UTF-8');
+    }
+    return $result;
 }
  
 /**
  * Склоняем словоформу
- * @author runcore
  */
 function morph($n, $f1, $f2, $f5) 
 {
@@ -59,5 +65,25 @@ function morph($n, $f1, $f2, $f5)
     if ($n == 1) return $f1;
     return $f5;
 }
+
+/**
+ * Расчтываем НДС
+ */
+function nds($sum, $tax = 20) 
+{
+    preg_replace('~\D+~','', $sum);
+    preg_replace('~\D+~','', $tax);
+    $vat = round($sum / ($tax + 100) * $tax);
+    return sprintf("%d руб. (%s), в т.ч. НДС (%d%%) %d руб. (%s)", $sum, num2str($sum, true), $tax, $vat, num2str($vat, true));
+}
+
+switch ($type) {
+  case 'n2t':
+    $output = num2str($text);
+    break;
+  case 'nds':
+    $output = nds($text);
+    break;
+}
  
-echo num2str($argv[1]);
+echo $output;
