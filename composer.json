@@ -1,0 +1,14 @@
+{
+    "name": "borzov/alfred-num2text-workflow",
+    "description": "Generate digits to text string in russian",
+    "license": "MIT",
+    "require": {
+        "joetannenbaum/alfred-workflow": "^0.1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Borzov\\NumToText\\": "src"
+        }
+    }
+
+}
